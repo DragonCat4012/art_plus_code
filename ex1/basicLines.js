@@ -16,13 +16,17 @@
 Canvas.setpenopacity(1);
 
 const stepSize = 2; // min=1 max=100 step=10  Shape Placing
+const gridLenght = 860; // min=400 max=1000 step=50  Grid Length
+const chaosLevel = 0; // min=0, max=2, step=1, (Zero, Some, All)
+
+const chaosValues = [45, 30];
+
 const t = new Turtle();
 t.penup();
 t.goto(-350, -150);
 t.pendown();
 
-//gridOne()
-gridOneWithRects();
+gridOne();
 gridTwo();
 
 // The walk function will be called until it returns false.
@@ -40,7 +44,7 @@ function gridTwo() {
   for (let i = 0; i < 20; i++) {
     t.left(45);
 
-    for (let j = 0; j < 400 / stepSize; j++) {
+    for (let j = 0; j < gridLenght / stepSize; j++) {
       t.penup();
       t.forward(stepSize);
       t.pendown();
@@ -48,13 +52,13 @@ function gridTwo() {
     }
 
     t.penup();
-    t.backward(400);
+    t.backward(gridLenght);
     t.right(45);
     t.forward(20);
     t.pendown();
   }
 }
-function gridOneWithRects() {
+function gridOne() {
   t.penup();
   t.goto(-350, -150);
   t.setheading(0);
@@ -62,7 +66,7 @@ function gridOneWithRects() {
   for (let i = 0; i < 20; i++) {
     t.right(45);
 
-    for (let j = 0; j < 400 / stepSize; j++) {
+    for (let j = 0; j < gridLenght / stepSize; j++) {
       t.penup();
       t.forward(stepSize);
       t.pendown();
@@ -70,46 +74,39 @@ function gridOneWithRects() {
     }
 
     t.penup();
-    t.backward(400);
+    t.backward(gridLenght);
     t.left(45);
     t.forward(20);
     t.pendown();
   }
 }
 
-function gridOne() {
-  for (let i = 0; i < 20; i++) {
-    t.right(45);
-    t.forward(400);
-    t.penup();
-    t.backward(400);
-    t.left(45);
-    t.forward(20);
-    t.pendown();
-  }
-}
+function getChaos() {
+  if (chaosLevel > 1) {
+    return Math.floor(Math.random() * 361);
+  } else if (chaosLevel > 0) {
+    var random_boolean = Math.random() < 0.5;
 
-function abc2(x, y) {
-  t.penup();
-  t.goto(x + 2, y - 4);
-  t.pendown();
-  for (let i = 0; i < 4; i++) {
-    t.right(90);
-    t.forward(8);
+    if (Math.random() < 0.5) {
+      return chaosValues[0];
+      // return chaosValues[chaosLevel+34]
+    }
+
+    return chaosValues[chaosLevel];
   }
-  t.penup();
-  t.goto(x, y);
-  t.pendown();
+  return chaosValues[chaosLevel];
 }
 
 function abc(x, y) {
+  const angle = getChaos();
   const prevHeading = t.heading();
-  t.right(45);
+
+  t.right(angle);
   t.backward(5);
   t.forward(10);
   t.penup();
   t.backward(5);
-  t.left(45);
+  //t.left(angle);
   t.setheading(prevHeading);
   t.pendown();
 }
