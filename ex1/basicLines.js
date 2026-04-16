@@ -15,7 +15,7 @@
 
 Canvas.setpenopacity(1);
 
-const stepSize = 16; // min=10 max=100 step=10  Shape Placing
+const stepSize = 2; // min=1 max=100 step=10  Shape Placing
 const t = new Turtle();
 t.penup();
 t.goto(-350, -150);
@@ -41,7 +41,9 @@ function gridTwo() {
     t.left(45);
 
     for (let j = 0; j < 400 / stepSize; j++) {
+      t.penup();
       t.forward(stepSize);
+      t.pendown();
       abc(t.pos()[0], t.pos()[1]);
     }
 
@@ -61,7 +63,9 @@ function gridOneWithRects() {
     t.right(45);
 
     for (let j = 0; j < 400 / stepSize; j++) {
+      t.penup();
       t.forward(stepSize);
+      t.pendown();
       abc(t.pos()[0], t.pos()[1]);
     }
 
@@ -85,7 +89,7 @@ function gridOne() {
   }
 }
 
-function abc(x, y) {
+function abc2(x, y) {
   t.penup();
   t.goto(x + 2, y - 4);
   t.pendown();
@@ -95,5 +99,17 @@ function abc(x, y) {
   }
   t.penup();
   t.goto(x, y);
+  t.pendown();
+}
+
+function abc(x, y) {
+  const prevHeading = t.heading();
+  t.right(45);
+  t.backward(5);
+  t.forward(10);
+  t.penup();
+  t.backward(5);
+  t.left(45);
+  t.setheading(prevHeading);
   t.pendown();
 }
