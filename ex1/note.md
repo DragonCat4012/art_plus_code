@@ -1,7 +1,7 @@
 # Excercise 1
 
 ## Basics
-Line spoositiooned regularly in a 45 deg. slanted grid. Three variables which change the composition: **chaoslevel, stepSize**
+Line positioned regularly in a 45 deg. slanted grid. Three variables which change the composition: **chaoslevel, stepSize, gridRotation**
 
 ## Shapes on a grid
 * Shapes: circle, star

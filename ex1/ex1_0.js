@@ -9,7 +9,7 @@ Canvas.setpenopacity(1);
 
 const gridRot = 45; // min=45 max=90 step=5  Shape Placing
 const stepSize = 2; // min=1 max=8 step=1  Shape Placing
-const gridLenght = 1260;
+const gridLenght = 400;
 const lineLength = 3;
 
 const chaosLevel = 0; // min=0, max=2, step=1, (Zero, Some, All)
@@ -29,8 +29,8 @@ function gridTwo() {
   t.pendown();
   t.forward(20);
 
-  for (let i = 0; i < 20; i++) {
-    t.left(45);
+  for (let i = 0; i < 30; i++) {
+    t.left(gridRot);
 
     for (let j = 0; j < gridLenght / stepSize; j++) {
       t.penup();
@@ -41,7 +41,7 @@ function gridTwo() {
 
     t.penup();
     t.backward(gridLenght);
-    t.right(45);
+    t.right(gridRot);
     t.forward(20);
     t.pendown();
   }
@@ -49,11 +49,12 @@ function gridTwo() {
 
 function gridOne() {
   t.penup();
+
   t.goto(-350, -150);
   t.setheading(0);
   t.pendown();
-  for (let i = 0; i < 20; i++) {
-    t.right(45);
+  for (let i = 0; i < 30; i++) {
+    t.right(gridRot);
 
     for (let j = 0; j < gridLenght / stepSize; j++) {
       t.penup();
@@ -64,7 +65,7 @@ function gridOne() {
 
     t.penup();
     t.backward(gridLenght);
-    t.left(45);
+    t.left(gridRot);
     t.forward(20);
     t.pendown();
   }
