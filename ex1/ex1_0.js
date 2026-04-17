@@ -7,26 +7,20 @@ Record a ~10 sec screencapture showing them in action.
 
 Canvas.setpenopacity(1);
 
-const stepSize = 2; // min=1 max=100 step=10  Shape Placing
-const gridLenght = 860; // min=400 max=1000 step=50  Grid Length
-const chaosLevel = 0; // min=0, max=2, step=1, (Zero, Some, All)
+const gridRot = 45; // min=45 max=90 step=5  Shape Placing
+const stepSize = 2; // min=1 max=8 step=1  Shape Placing
+const gridLenght = 1260;
+const lineLength = 3;
 
-const chaosValues = [45, 30]; // ordered chaos Angle values
+const chaosLevel = 0; // min=0, max=2, step=1, (Zero, Some, All)
+const chaosValues = [45, 30, 25, 45, 5, 60, 88]; // ordered chaos Angle values
 
 const t = new Turtle();
-t.penup();
-t.goto(-350, -150);
-t.pendown();
 
 // draw two angled lines to create a slanted grid
 // both do the same just different startpoints and left/right switched, could be moved into one singular func
 gridOne();
 gridTwo();
-
-// The walk function will be called until it returns false.
-function walk(i) {
-  return i < 20;
-}
 
 function gridTwo() {
   t.penup();
@@ -42,7 +36,7 @@ function gridTwo() {
       t.penup();
       t.forward(stepSize);
       t.pendown();
-      abc(t.pos()[0], t.pos()[1]);
+      drawGridLines(t.pos()[0], t.pos()[1]);
     }
 
     t.penup();
@@ -65,7 +59,7 @@ function gridOne() {
       t.penup();
       t.forward(stepSize);
       t.pendown();
-      abc(t.pos()[0], t.pos()[1]);
+      drawGridLines(t.pos()[0], t.pos()[1]);
     }
 
     t.penup();
@@ -84,7 +78,7 @@ function getChaos() {
     var random_boolean = Math.random() < 0.5;
 
     if (Math.random() < 0.5) {
-      return chaosValues[0];
+      return chaosValues[Math.floor(Math.random() * chaosValues.length)];
     }
     return chaosValues[chaosLevel];
   }
@@ -92,7 +86,7 @@ function getChaos() {
 }
 
 // Draw the lines on the grid
-function abc(x, y) {
+function drawGridLines(x, y) {
   const angle = getChaos();
   const prevHeading = t.heading();
 
@@ -103,4 +97,9 @@ function abc(x, y) {
   t.backward(5);
   t.setheading(prevHeading);
   t.pendown();
+}
+
+// The walk function will be called until it returns false.
+function walk(i) {
+  return i < 20;
 }
